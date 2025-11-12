@@ -104,6 +104,7 @@ module OpenapiFirst
     private
 
     def resolve_path(rack_request)
+      debugger
       return rack_request.path unless @config.path
 
       @config.path.call(rack_request)
