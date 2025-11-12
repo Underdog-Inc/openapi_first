@@ -108,7 +108,6 @@ module OpenapiFirst
     private
 
     def resolve_path(rack_request)
-      debugger
       return rack_request.path.delete_prefix(path_prefix) if path_prefix && rack_request.path.start_with?(path_prefix)
       return rack_request.path unless @config.path
 
