@@ -99,14 +99,12 @@ module OpenapiFirst
 
       OpenapiFirst.configure do |config|
         @after_request_validation = config.after_request_validation do |validated_request, oad|
-          debugger
           raise validated_request.error.exception if raise_request_error?(validated_request)
 
           Coverage.track_request(validated_request, oad)
         end
 
         @after_response_validation = config.after_response_validation do |validated_response, rack_request, oad|
-          debugger
           if validated_response.invalid? && raise_response_error?(validated_response)
             raise validated_response.error.exception
           end
@@ -119,13 +117,17 @@ module OpenapiFirst
 
     def self.raise_request_error?(validated_request)
       return false if validated_request.valid?
+      return false unless configuration.raise_error_for_request.call(validated_request)
       return false if validated_request.known?
 
       !configuration.ignore_unknown_requests
     end
 
     def self.raise_response_error?(invalid_response)
-      configuration.response_raise_error && !configuration.ignore_response?(invalid_response)
+      return false unless configuration.response_raise_error
+      return false unless configuration.raise_error_for_response.call(invalid_response)
+
+      !configuration.ignore_response?(invalid_response)
     end
 
     def self.uninstall
