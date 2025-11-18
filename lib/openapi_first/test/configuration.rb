@@ -22,9 +22,8 @@ module OpenapiFirst
       # Register OADs, but don't load them just yet
       # @param [OpenapiFirst::OAD] oad The OAD to register
       # @param [Symbol] as The name to register the OAD under
-      # @param [String,nil] path_prefix An optional path prefix that all requests will begin with
-      def register(oad, as: :default, path_prefix: nil)
-        Test.register(oad, as:, path_prefix:)
+      def register(oad, as: :default)
+        Test.register(oad, as:)
       end
 
       # Observe a rack app
