@@ -22,7 +22,7 @@ module OpenapiFirst
 
     # @param contents [Hash] The OpenAPI document.
     # @param filepath [String] The file path of the OpenAPI document.
-    # @param path_prefix [String,nil] An optional path prefix that all requests will begin with.
+    # @param path_prefix [String,nil] An optional path prefix, that is not documented, that all requests begin with.
     def initialize(contents, filepath = nil, path_prefix = nil)
       @filepath = filepath
       @path_prefix = path_prefix

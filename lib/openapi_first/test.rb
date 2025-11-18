@@ -99,12 +99,14 @@ module OpenapiFirst
 
       OpenapiFirst.configure do |config|
         @after_request_validation = config.after_request_validation do |validated_request, oad|
+          debugger
           raise validated_request.error.exception if raise_request_error?(validated_request)
 
           Coverage.track_request(validated_request, oad)
         end
 
         @after_response_validation = config.after_response_validation do |validated_response, rack_request, oad|
+          debugger
           if validated_response.invalid? && raise_response_error?(validated_response)
             raise validated_response.error.exception
           end

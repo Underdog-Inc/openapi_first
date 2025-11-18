@@ -13,8 +13,7 @@ module OpenapiFirst
     # Register an OpenAPI definition for testing
     # @param path_or_definition [String, Definition] Path to the OpenAPI file or a Definition object
     # @param as [Symbol] Name to register the API definition as
-    # @param path_prefix [String,nil] An optional path prefix that all requests will begin with
-    def register(path_or_definition, as: :default, path_prefix: nil)
+    def register(path_or_definition, as: :default)
       if definitions.key?(as) && as == :default
         raise(
           AlreadyRegisteredError,
