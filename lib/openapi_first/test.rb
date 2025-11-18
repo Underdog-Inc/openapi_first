@@ -105,7 +105,7 @@ module OpenapiFirst
         end
 
         @after_response_validation = config.after_response_validation do |validated_response, rack_request, oad|
-          if validated_response.invalid? && raise_response_error?(validated_response)
+          if validated_response.invalid? && raise_response_error?(validated_response, rack_request)
             raise validated_response.error.exception
           end
 
@@ -123,9 +123,9 @@ module OpenapiFirst
       !configuration.ignore_unknown_requests
     end
 
-    def self.raise_response_error?(invalid_response)
+    def self.raise_response_error?(invalid_response, rack_request)
       return false unless configuration.response_raise_error
-      return false unless configuration.raise_error_for_response.call(invalid_response)
+      return false unless configuration.raise_error_for_response.call(invalid_response, rack_request)
 
       !configuration.ignore_response?(invalid_response)
     end
