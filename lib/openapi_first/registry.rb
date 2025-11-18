@@ -24,7 +24,7 @@ module OpenapiFirst
         )
       end
 
-      definition = OpenapiFirst.load(path_or_definition, path_prefix:)
+      definition = OpenapiFirst.load(path_or_definition)
       definitions[as] = definition
       definition
     end
